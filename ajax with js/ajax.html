@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <button onclick="getRepo()">Click here</button>
+    <div id="show">username is: <br></div>
+    <script>
+    /*
+    Asynchronous : Mean it will happen in background and any other command happen too before it 
+    synchronous : Mean it nothing will happen until this happen first
+    ajax Asynchronous JavaScript and XML : it technique not programming Lang  
+    xhr XML Http Request 
+    */
+    
+    function getRepo(){ // function to call the Request
+        var myRequest = new XMLHttpRequest();//assign the request object to variable 
+        myRequest.onreadystatechange = function(){//on ready state change => function call when ready state Changed
+        /*
+        ready State => the status of the request 
+            [0] Request not intialized (Start). 
+            [1]Server Connection Establshed.
+            [2] Request Recieved. 
+            [3]proccessing request. 
+            [4] request is finished and response is ready.
+        Status => Response Status Code
+        responseText => print the respond as text
+        */
+        if(this.readyState===4 && this.status===200){
+
+            console.log(this.responseText)
+            
+            // Convert ResponseTExt to Js Object to loop on it 
+            var myJsObject = JSON.parse(this.responseText),
+                myText     = '';
+            // make loop in Js object to get usernames
+            for(var i=0; i < myJsObject.length ; i++){ myText += myJsObject[i].username+"<br>";}
+            // save output usersname inside div
+            document.getElementById('show').innerHTML += myText;   
+            
+        }
+        
+    };
+    /*
+        XMLHttpRequest.open(method,url,asyn bool) will open request 
+        XMLHttpRequest.send() will send ur request to server
+    */
+    myRequest.open('GET','ajax.json',true); //open request to get data from json file
+   //myRequest.open('GET','auth.php?name=ahmed&age=20',true);open request to get data from php 
+    myRequest.send();
+    }
+    </script>
+</body>
+</html>

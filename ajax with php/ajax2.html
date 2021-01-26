@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <button onclick="getRepo()">Click here</button>
+    <div id="show">username is: <br></div>
+    <script>
+    // send request with php 
+    function getRepo(){ 
+        var myRequest = new XMLHttpRequest();
+        myRequest.onreadystatechange = function(){
+        
+        if(this.readyState===4 && this.status===200){
+
+            console.log(this.responseText)
+         
+        }
+        
+    };
+   
+  // myRequest.open('GET','auth.php?name=ahmed&age=20',true);  open request to get data from php auth.php
+    myRequest.open('POST','auth.php?',true); // open request to Post data from php file auth.php
+    myRequest.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+    myRequest.send("name=ahmed&age=20");
+    }
+    </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>Get Data</button>
+    <div id="show"></div>
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+    // use ajax JQuery $.ajax()
+    $(function(){
+      $('button').on('click',function(){
+        $.ajax({
+            method  : "POST", // this is Method
+            url     : "comment.php", // this url
+            data    : {comment : "Very bad man"}, // the data u put
+            beforeSend : function(xhr){console.log(xhr);},
+            success : function(data,Status,xhr){ // function run when request successed
+                console.log(data); // the data
+                console.log(Status); // the status
+                console.log(xhr); //xhr object
+                $('#show').html(data);
+            },
+            error   : function(xhr,Status,data){// function run when request Failed
+                console.log(data); // the data
+                console.log(Status); // the status
+                console.log(xhr); //xhr object
+            },
+            complete : function(xhr,Status){// function run when request is Complete (finish)
+                console.log(Status); // the status
+                console.log(xhr); //xhr object
+            }
+            
+
+        });
+      });
+
+    });
+    </script>
+</body>
+</html>

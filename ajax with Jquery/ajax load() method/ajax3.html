@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button data-page='demo1.html'>page 1</button>
+    <button data-page='demo2.html'>page 2</button>
+    <div id="show"></div>
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+    $(function(){
+        // load() method to load content of page or file or url inside ur home page
+       $('button').on("click",function(){
+            $("#show").load($(this).data("page")+' .content',function(respondText,Status,xhr){
+                console.log(respondText); // get response as Text
+                console.log(Status); // Get the Status (success or Error)
+                console.log(xhr); // Get xmlHttpRequest object
+            });
+       });
+
+
+       /*
+        $("#show").load("demo1.html .content",function(respondText,Status,xhr){
+            console.log(respondText); // get response as Text
+            console.log(Status); // Get the Status (success or Error)
+            console.log(xhr); // Get xmlHttpRequest object
+        });
+       */
+    });
+    </script>
+</body>
+</html>
